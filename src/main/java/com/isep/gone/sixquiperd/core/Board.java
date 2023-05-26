@@ -2,20 +2,25 @@ package com.isep.gone.sixquiperd.core;
 
 import lombok.Data;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.List;
+import java.util.*;
 
 @Data
 public class Board {
-    Deque<Card> row1 = new ArrayDeque<>();
-    Deque<Card> row2 = new ArrayDeque<>();
-    Deque<Card> row3 = new ArrayDeque<>();
-    Deque<Card> row4 = new ArrayDeque<>();
-
-    public Board(List<Card> firstCards) {
-        if(firstCards.size() != 4) {
-            throw new IllegalArgumentException("The length of the list must be 4");
+    ArrayDeque<Card>[] rows = new ArrayDeque[4];
+    public Board(Deque<Card> cards) {
+        if(cards.size() < 4){
+            throw new IllegalArgumentException("Cannot play with less than 4 cards !");
         }
+        for (var row: rows){
+            row.add(cards.remove());
+        }
+    }
+
+    public boolean addCardToBoard(Card card) {
+        return false;
+    }
+
+    public boolean addCardToBoard(Card card, int rowNumber){
+        return false;
     }
 }
