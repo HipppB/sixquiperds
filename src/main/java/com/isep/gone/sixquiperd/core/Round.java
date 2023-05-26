@@ -1,13 +1,17 @@
 package com.isep.gone.sixquiperd.core;
 
+import lombok.Getter;
+
 import java.util.*;
 
+@Getter
 public class Round {
-    List<Player> players;
-    Deque<Card> deck;
-    Board board;
+    private final int turn = 0;
+    private final List<Player> players;
+    private Deque<Card> deck;
+    private Board board;
 
-    public Round(List<Player>players, List<Card> initialDeck) {
+    public Round(List<Player> players, List<Card> initialDeck) {
         this.players = players;
         Collections.shuffle(initialDeck);
         this.deck = new ArrayDeque<>(initialDeck);
@@ -18,7 +22,7 @@ public class Round {
     private void giveCardsToPlayers() {
         players.forEach(player -> {
             List<Card> playerCards = new ArrayList<>();
-            for (int i = 0; i<10; i++){
+            for (int i = 0; i < 10; i++) {
                 playerCards.add(deck.remove());
             }
             player.initHand(playerCards);
@@ -26,8 +30,11 @@ public class Round {
     }
 
     public void play() {
-        for (int i = 0; i < 10; i++){
-            System.out.println(i);
-        }
+
     }
+
+    public Card movePlayerCard(Player player) {
+        return null;
+    }
+
 }
