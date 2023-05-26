@@ -17,9 +17,9 @@ public class Player {
     public Player(@NotNull String name) {
         this.name = name;
     }
-    public void initHand(List<Card> cards) throws IllegalAccessException {
+    public void initHand(List<Card> cards) {
         if(cards.size() != 10){
-            throw new IllegalAccessException("Card length must be 10");
+            throw new IllegalArgumentException("Card length must be 10");
         }
     }
     public void addScore(Integer score) {
