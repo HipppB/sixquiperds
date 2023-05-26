@@ -25,4 +25,12 @@ public class Player {
     public void addScore(Integer score) {
         this.score += score;
     }
+
+    public Card playCard(Card card) {
+        if(!hand.contains(card)) {
+            throw new IllegalArgumentException("Card must be in hand");
+        }
+        hand.remove(card);
+        return card;
+    }
 }
