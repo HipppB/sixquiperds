@@ -1,20 +1,32 @@
 package com.isep.gone.sixquiperd.core;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Game {
-
-    public static final List<Player> randomList = List.of(Player.randomHumanPlayer, Player.randomBotPlayer);
     List<Player> players;
 
     Player currentPlayer;
+
+    Player mainPlayer;
     List<Card> initialDeck = new ArrayList<>();
 
     Round currentRound;
 
-    public Game(List<Player> players) {
-        this.players = players;
+    public Game(String mainPlayerName, int nbBots) {
+        mainPlayer = new Player(mainPlayerName, true);
+        players = List.of(mainPlayer);
+        for (int i = 0; i < nbBots; i++) {
+            players.add(new Player("Bot " + i, false));
+        }
+        players.forEach(player -> {
+            if (player.isHuman()) {
+                mainPlayer = player;
+            }
+        });
         initDeck();
         initRound();
 //        play();

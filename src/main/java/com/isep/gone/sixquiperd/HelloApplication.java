@@ -16,7 +16,7 @@ import java.util.Objects;
 
 public class HelloApplication extends Application {
 
-    private final Game game = new Game(Game.randomList);
+    private final Game game = new Game("Randomix", 1);
 
     public static void main(String[] args) {
         launch();
@@ -71,6 +71,7 @@ public class HelloApplication extends Application {
                 System.out.println("Current player: " + game.getCurrentPlayer());
                 System.out.println("Board: " + game.getBoard());
                 game.getCurrentPlayer();
+                game.getMainPlayer();
                 game.getBoard();
             }
         }.start();
