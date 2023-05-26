@@ -1,7 +1,8 @@
 package com.isep.gone.sixquiperd;
 
+import com.isep.gone.sixquiperd.core.Game;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -14,15 +15,21 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class HelloApplication extends Application {
+
+    private final Game game = new Game(Game.randomList);
+
+    public static void main(String[] args) {
+        launch();
+    }
+
     @Override
     public void start(Stage stage) throws IOException {
-        //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         GridPane root = new GridPane();
         Scene scene = new Scene(root, 640, 480);
         scene.getStylesheets().add(Objects.requireNonNull(
                 getClass().getResource("hello.css")
-                ).toExternalForm(
-                ));
+        ).toExternalForm(
+        ));
 
         stage.setTitle("Formulaire");
         // formulaire contenant nom, mot de passe, bouton de connexion
@@ -54,14 +61,20 @@ public class HelloApplication extends Application {
         root.add(rb2, 0, 1);
 
 
-
-
-
         stage.setScene(scene);
         stage.show();
+
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                game.play();
+                System.out.println("Current player: " + game.getCurrentPlayer());
+                System.out.println("Board: " + game.getBoard());
+                game.getCurrentPlayer();
+                game.getBoard();
+            }
+        }.start();
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
+
 }
