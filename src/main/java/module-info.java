@@ -10,6 +10,9 @@ module com.isep.gone.sixquiperd {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires lombok;
+    requires annotations;
+
 
     opens com.isep.gone.sixquiperd to javafx.fxml;
     exports com.isep.gone.sixquiperd;
