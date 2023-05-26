@@ -1,27 +1,33 @@
 package com.isep.gone.sixquiperd.core;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 public class Player {
-    @NonNull String name;
-    Integer score = 0;
-    List<Card> hand = List.of();
+    public static final Player randomHumanPlayer = new Player("Random Playerix", true);
+    public static final Player randomBotPlayer = new Player("Random Bot", false);
+    @NonNull
+    private final String name;
+    private final List<Card> hand = List.of();
 
-    public Player(@NotNull String name) {
+    private final boolean isHuman;
+    private Integer score = 0;
+
+    public Player(@NotNull String name, boolean isHuman) {
         this.name = name;
+        this.isHuman = isHuman;
     }
+
     public void initHand(List<Card> cards) {
-        if(cards.size() != 10){
+        if (cards.size() != 10) {
             throw new IllegalArgumentException("Card length must be 10");
         }
     }
+
     public void addScore(Integer score) {
         this.score += score;
     }
