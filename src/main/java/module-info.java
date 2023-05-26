@@ -13,6 +13,9 @@ module com.isep.gone.sixquiperd {
     requires annotations;
 
 
-    opens com.isep.gone.sixquiperd to javafx.fxml;
     exports com.isep.gone.sixquiperd;
+    opens com.isep.gone.sixquiperd to javafx.fxml;
+    exports com.isep.gone.sixquiperd.ui;
+    opens com.isep.gone.sixquiperd.ui to javafx.fxml;
+
 }
