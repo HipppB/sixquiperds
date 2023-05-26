@@ -1,4 +1,4 @@
-package com.isep.gone.sixquiperd.game;
+package com.isep.gone.sixquiperd.core;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +7,7 @@ class CardTest {
     @Test
     void constructor() {
         Card card = new Card(1, 7);
-        assertEquals(1, card.getValue());
+        assertEquals(1, card.getCardNumber());
         assertThrows(IllegalArgumentException.class, () ->  new Card(0, 1));
         assertThrows(IllegalArgumentException.class, () ->  new Card(105, 1));
         assertThrows(IllegalArgumentException.class, () ->  new Card(1, 8));
@@ -16,9 +16,9 @@ class CardTest {
     @Test
     void getters() {
         Card card = new Card(1, 1);
-        assertEquals(1, card.getValue());
+        assertEquals(1, card.getCardNumber());
         card = new Card(104, 7);
-        assertEquals(7, card.getBeefValue());
+        assertEquals(7, card.getBeefHead());
     }
     @Test
     void isHidden() {
