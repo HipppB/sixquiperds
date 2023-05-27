@@ -14,20 +14,28 @@ public class GameUiApplication extends javafx.application.Application {
         System.out.println("Game started");
         new AnimationTimer() {
             Game game = new Game("Super Player", 4);
-            Player player = game.getPlayer();
             BoardUi boardUi = new BoardUi(primaryStage);
+
+            Player player = game.getMainPlayer();
+
 
             @Override
             public void handle(long now) {
-                boardUi.display(game.getBoard(), game.getCurrentPlayer());
-                stop();
+                boardUi.display(game.getBoard(), player);
 
-//                board = game.getBoard();
-//                player = game.getPlayer();
+                System.out.println("GameUiApplication: handle");
+//                boardUi.display(game.getBoard(), player);
 //
-//                if (game.getCurrentPlayer().isHuman()) {
-//                    game.getCurrentPlayer().play();
+//                if (game.getCurrentPlayer() == player) {
 //
+//                } else {
+                try {
+                    Thread.sleep(1000);
+                    System.out.println("GameUiApplication: handle: sleep");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+//                    game.play();
 //                }
 //                game.play();
 
