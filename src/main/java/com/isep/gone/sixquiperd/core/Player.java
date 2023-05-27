@@ -17,27 +17,56 @@ public class Player {
     private final boolean isHuman;
     private Integer score = 0;
 
+    private Card cardToPlay;
+
+    private int rowToPlay;
+
     public Player(@NotNull String name, boolean isHuman) {
         this.name = name;
         this.isHuman = isHuman;
     }
 
-    public void initHand(List<Card> cards) {
+    protected void initHand(List<Card> cards) {
         if (cards.size() != 10) {
             throw new IllegalArgumentException("Card length must be 10");
         }
         hand.addAll(cards);
     }
 
-    public void addScore(Integer score) {
+    protected void addScore(Integer score) {
         this.score += score;
     }
 
-    public Card playCard(Card card) {
-        if(!hand.contains(card)) {
+    public void playCard(Card card) {
+        if (!hand.contains(card)) {
             throw new IllegalArgumentException("Card must be in hand");
         }
         hand.remove(card);
+        this.cardToPlay = card;
+    }
+
+    public Card useCard() {
+        var card = cardToPlay;
+        cardToPlay = null;
         return card;
+    }
+
+    public void playRow(int rowNumber) {
+        if (rowNumber < 0 || rowNumber > 3) {
+            throw new IllegalArgumentException("Row number must be between 0 and 3");
+        }
+        this.rowToPlay = rowNumber;
+    }
+
+    public void useRow() {
+        this.rowToPlay = -1;
+    }
+
+    public boolean hasPlayerChosen() {
+        return this.cardToPlay != null && this.rowToPlay != -1;
+    }
+
+    public int getCardToPlayNumber() {
+        return cardToPlay.getCardNumber();
     }
 }

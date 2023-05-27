@@ -7,14 +7,12 @@ import java.util.List;
 
 @Getter
 public class Game {
-    List<Player> players;
+    private List<Player> players;
 
-    Player currentPlayer;
+    private Player mainPlayer;
+    private List<Card> initialDeck = new ArrayList<>();
 
-    Player mainPlayer;
-    List<Card> initialDeck = new ArrayList<>();
-
-    Round currentRound;
+    private Round currentRound;
 
     public Game(String mainPlayerName, Integer nbBots) {
         mainPlayer = new Player(mainPlayerName, true);
@@ -25,11 +23,14 @@ public class Game {
         }
         initDeck();
         initRound();
-//        play();
     }
 
     public void initRound() {
         currentRound = new Round(players, initialDeck);
+    }
+
+    public boolean isGameOver() {
+        return players.stream().anyMatch(player -> player.getScore() >= 66);
     }
 
     private void initDeck() {
@@ -51,24 +52,21 @@ public class Game {
     }
 
     public void play() {
-
-    }
-
-
-    public boolean isPlayerTurn() {
-        return currentPlayer.isHuman();
+        if (!isGameOver()) {
+            currentRound.play();
+        }
     }
 
     public void chooseCard(Card card) {
-        if (currentPlayer.getHand().contains(card)) {
-            currentRound.movePlayerCard(currentPlayer);
+        if (currentRound.getCurrentPlayer().getHand().contains(card)) {
+            currentRound.getCurrentPlayer().playCard(card);
         } else {
             throw new IllegalArgumentException("Card not in hand");
         }
     }
 
     public Player getCurrentPlayer() {
-        return players.get(0);
+        return currentRound.getCurrentPlayer();
     }
 
     public Board getBoard() {
