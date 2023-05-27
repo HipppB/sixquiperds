@@ -14,7 +14,7 @@ public class Player {
     @NonNull
     private final String name;
     private final boolean isHuman;
-    private List<Card> hand = new ArrayList<>();
+    private final List<Card> hand = new ArrayList<>();
     private Integer score = 0;
 
     private Card cardToPlay;
@@ -37,7 +37,7 @@ public class Player {
         this.score += score;
     }
 
-    public void playCard(Card card) {
+    protected void playCard(Card card) {
         if (!hand.contains(card)) {
             throw new IllegalArgumentException("Card must be in hand");
         }
@@ -45,13 +45,11 @@ public class Player {
         this.cardToPlay = card;
     }
 
-    protected Card useCard() {
-        var card = cardToPlay;
+    protected void useCard() {
         cardToPlay = null;
-        return card;
     }
 
-    public void playRow(int rowNumber) {
+    protected void playRow(int rowNumber) {
         if (rowNumber < 0 || rowNumber > 3) {
             throw new IllegalArgumentException("Row number must be between 0 and 3");
         }

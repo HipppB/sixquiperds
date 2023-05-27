@@ -7,7 +7,7 @@ import java.util.*;
 
 @Data
 public class Board {
-    @NonNull List<Deque<Card>> rows = new ArrayList<>();
+    private @NonNull List<Deque<Card>> rows = new ArrayList<>();
 
     private List<Card> cardsToReturn = new ArrayList<>();
 
@@ -22,47 +22,48 @@ public class Board {
         }
     }
 
-    public boolean addCardToBoard(Card card, Player player) {
+    protected void addCardToBoard(Card card, Player player) {
         var usableRows = new ArrayList<>(this.rows.stream().filter(row -> {
             assert row.peek() != null;
-            return row.peek().cardNumber < card.cardNumber;
+            return row.peek().getCardNumber() < card.getCardNumber();
         }).toList());
         if (usableRows.isEmpty()) {
-            return false;
+            return;
         }
-        usableRows.sort(Comparator.comparingInt(o -> o.peek().cardNumber));
+        usableRows.sort(Comparator.comparingInt(o -> {
+            assert o.peek() != null;
+            return o.peek().getCardNumber();
+        }));
         Deque<Card> row = rows.get(rows.size() - 1);
         int rowNumber = this.rows.indexOf(row);
         if (row.size() == 5) {
-            player.addScore(row.stream().mapToInt(card1 -> card1.beefHead).sum());
+            player.addScore(row.stream().mapToInt(Card::getBeefHead).sum());
             row = new ArrayDeque<>();
         }
         row.add(card);
         this.rows.set(rowNumber, row);
-        return true;
+        this.cardsToReturn.remove(card);
     }
 
-    public void addCardToBoardRow(Card card, int rowNumber, Player player) {
-        System.out.println("Adding card " + card.cardNumber + " to row " + rowNumber + " for player " + player.getName());
+    protected void addCardToBoardRow(Card card, int rowNumber, Player player) {
         Deque<Card> row = rows.get(rowNumber);
         if (row.size() == 5) {
-            player.addScore(row.stream().mapToInt(card1 -> card1.beefHead).sum());
+            player.addScore(row.stream().mapToInt(Card::getBeefHead).sum());
             row = new ArrayDeque<>();
         }
         row.add(card);
         rows.set(rowNumber, row);
+        this.cardsToReturn.remove(card);
     }
 
     protected void addCardToReturn(Card card) {
         cardsToReturn.add(card);
     }
 
-    protected void removeCardToReturn(Card card) {
-        cardsToReturn.remove(card);
-    }
 
     protected boolean needsToChooseARow(Player player) {
         for (var row : rows) {
+            assert row.peek() != null;
             if (row.peek().getCardNumber() < player.getCardToPlayNumber()) {
                 return false;
             }

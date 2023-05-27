@@ -8,9 +8,9 @@ import java.util.*;
 @Getter
 public class Round {
     private final List<Player> players;
+    private final Deque<Card> deck;
+    private final Board board;
     private int turn = 1;
-    private Deque<Card> deck;
-    private Board board;
     private Iterator<Player> playerIterator;
     private Player currentPlayer;
     private RoundState state = RoundState.CHOOSE_CARD;
@@ -49,12 +49,7 @@ public class Round {
             this.playerIterator = players.iterator();
             goToNextPlayer();
         } else {
-            System.out.println("Error");
-            players.forEach(player -> {
-                if (player.getCardToPlay() == null) {
-                    System.out.println(player.getName() + " has no card to play");
-                }
-            });
+            throw new IllegalArgumentException("Some player info are incorrect");
         }
     }
 
@@ -64,14 +59,16 @@ public class Round {
             return;
         }
         if (this.currentPlayer.getCardToPlay() == null) {
-            this.currentPlayer.playCard(this.currentPlayer.getHand().get(DumbAi.play(this.currentPlayer.getHand().size())));
+            Card cardToAdd = this.currentPlayer.getHand().get(DumbAi.play(this.currentPlayer.getHand().size()));
+            this.currentPlayer.playCard(cardToAdd);
+            this.board.addCardToReturn(cardToAdd);
             goToNextPlayer();
             return;
         }
         goToNextPlayer();
     }
 
-    public void goToNextPlayer() {
+    private void goToNextPlayer() {
         if (playerIterator.hasNext()) {
             currentPlayer = playerIterator.next();
         } else {
@@ -81,18 +78,10 @@ public class Round {
 
     public void play() {
         switch (state) {
-            case CHOOSE_CARD:
-                chooseCard();
-                break;
-            case CHOOSE_ROW:
-                chooseRow();
-                break;
-            case WAITING_FOR_CARD:
-                hasPlayerChosenCard();
-                break;
-            case WAITING_FOR_ROW:
-                hasPlayerChosenRow();
-                break;
+            case CHOOSE_CARD -> chooseCard();
+            case CHOOSE_ROW -> chooseRow();
+            case WAITING_FOR_CARD -> hasPlayerChosenCard();
+            case WAITING_FOR_ROW -> hasPlayerChosenRow();
         }
     }
 
@@ -109,6 +98,7 @@ public class Round {
     private void hasPlayerChosenCard() {
         if (this.currentPlayer.hasPlayerChosen()) {
             this.state = RoundState.CHOOSE_CARD;
+            this.board.addCardToReturn(this.currentPlayer.getCardToPlay());
             goToNextPlayer();
         }
     }

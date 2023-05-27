@@ -7,10 +7,10 @@ import java.util.List;
 
 @Getter
 public class Game {
-    private List<Player> players;
+    private final List<Player> players;
 
-    private Player mainPlayer;
-    private List<Card> initialDeck = new ArrayList<>();
+    private final Player mainPlayer;
+    private final List<Card> initialDeck = new ArrayList<>();
 
     private Round currentRound;
 
@@ -25,7 +25,7 @@ public class Game {
         initRound();
     }
 
-    public void initRound() {
+    private void initRound() {
         currentRound = new Round(players, initialDeck);
     }
 

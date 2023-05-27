@@ -1,13 +1,17 @@
 package com.isep.gone.sixquiperd.server;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 // This class will be the AI of the game, it will be able to play the game
 // It returns a random move
-public class DumbAi {
-    public static int play(int handSize) {
-        return (int) (Math.random() * handSize - 1);
+public interface DumbAi {
+    static int play(int handSize) {
+        ThreadLocalRandom tlr = ThreadLocalRandom.current();
+        return tlr.nextInt(0, handSize);
     }
 
-    public static int chooseRow() {
-        return (int) (Math.random() * 4 - 1);
+    static int chooseRow() {
+        ThreadLocalRandom tlr = ThreadLocalRandom.current();
+        return tlr.nextInt(0, 4);
     }
 }
