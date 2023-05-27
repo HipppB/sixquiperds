@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -12,9 +13,8 @@ public class Player {
     public static final Player randomBotPlayer = new Player("Random Bot", false);
     @NonNull
     private final String name;
-    private final List<Card> hand = List.of();
-
     private final boolean isHuman;
+    private List<Card> hand = new ArrayList<>();
     private Integer score = 0;
 
     private Card cardToPlay;
