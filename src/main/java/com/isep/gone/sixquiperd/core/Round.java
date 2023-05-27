@@ -36,82 +36,119 @@ public class Round {
         });
     }
 
-    public void chooseCards() {
-        if (!currentPlayer.isHuman()) {
-            Card cardToPlay = currentPlayer.getHand().get(DumbAi.play(currentPlayer.getHand().size()));
-            currentPlayer.playCard(cardToPlay);
-            board.addCardToReturn(cardToPlay);
-            if (playerIterator.hasNext()) {
-                this.currentPlayer = playerIterator.next();
-            } else {
-                this.state = RoundState.CHOOSE_ROW;
-                var clonedPlayers = new ArrayList<>(players);
-                clonedPlayers.sort(Comparator.comparingInt(Player::getCardToPlayNumber));
-                playerIterator = clonedPlayers.iterator();
-                currentPlayer = playerIterator.next();
-            }
+    private void changeState() {
+        if (this.players.stream().allMatch(player -> player.getCardToPlay() != null)) {
+            this.state = RoundState.CHOOSE_ROW;
+            var clonedPlayers = new ArrayList<>(players);
+            clonedPlayers.sort(Comparator.comparingInt(Player::getCardToPlayNumber));
+            playerIterator = clonedPlayers.iterator();
+            goToNextPlayer();
+        } else if (this.players.stream().allMatch(player -> player.getCardToPlay() == null)) {
+            this.state = RoundState.CHOOSE_CARD;
+            this.turn++;
+            this.playerIterator = players.iterator();
+            goToNextPlayer();
+        } else {
+            System.out.println("Error");
+            players.forEach(player -> {
+                if (player.getCardToPlay() == null) {
+                    System.out.println(player.getName() + " has no card to play");
+                }
+            });
+        }
+    }
+
+    public void chooseCard() {
+        if (this.currentPlayer.isHuman() && this.currentPlayer.getCardToPlay() == null) {
+            this.state = RoundState.WAITING_FOR_CARD;
             return;
         }
-        if (currentPlayer.hasPlayerChosen()) {
-            this.board.addCardToReturn(currentPlayer.getCardToPlay());
-            if (playerIterator.hasNext()) {
-                this.currentPlayer = playerIterator.next();
-            } else {
-                this.state = RoundState.CHOOSE_ROW;
-                var clonedPlayers = new ArrayList<>(players);
-                clonedPlayers.sort(Comparator.comparingInt(Player::getCardToPlayNumber));
-                playerIterator = clonedPlayers.iterator();
-                currentPlayer = playerIterator.next();
-            }
+        if (this.currentPlayer.getCardToPlay() == null) {
+            this.currentPlayer.playCard(this.currentPlayer.getHand().get(DumbAi.play(this.currentPlayer.getHand().size())));
+            goToNextPlayer();
+            return;
+        }
+        goToNextPlayer();
+    }
+
+    public void goToNextPlayer() {
+        if (playerIterator.hasNext()) {
+            currentPlayer = playerIterator.next();
+        } else {
+            changeState();
         }
     }
 
     public void play() {
-        if (turn <= 10) {
-            switch (this.state) {
-                case CHOOSE_ROW -> chooseRow();
-                case CHOOSE_CARD -> chooseCards();
-            }
+        switch (state) {
+            case CHOOSE_CARD:
+                chooseCard();
+                break;
+            case CHOOSE_ROW:
+                chooseRow();
+                break;
+            case WAITING_FOR_CARD:
+                hasPlayerChosenCard();
+                break;
+            case WAITING_FOR_ROW:
+                hasPlayerChosenRow();
+                break;
         }
     }
+
+    private void hasPlayerChosenRow() {
+        if (this.currentPlayer.getRowToPlay() != -1) {
+            this.board.addCardToBoardRow(currentPlayer.getCardToPlay(), currentPlayer.getRowToPlay(), currentPlayer);
+            this.currentPlayer.useCard();
+            this.currentPlayer.useRow();
+            this.state = RoundState.CHOOSE_ROW;
+            goToNextPlayer();
+        }
+    }
+
+    private void hasPlayerChosenCard() {
+        if (this.currentPlayer.hasPlayerChosen()) {
+            this.state = RoundState.CHOOSE_CARD;
+            goToNextPlayer();
+        }
+    }
+
 
     private void chooseRow() {
-        var cardAdded = board.addCardToBoard(currentPlayer.getCardToPlay(), currentPlayer);
-        if (cardAdded) {
-            this.board.removeCardToReturn(currentPlayer.getCardToPlay());
-            currentPlayer.useCard();
-        }
-        if (!currentPlayer.isHuman()) {
-            currentPlayer.playRow(DumbAi.chooseRow());
-            board.addCardToBoardRow(currentPlayer.getCardToPlay(), currentPlayer.getRowToPlay(), currentPlayer);
-            currentPlayer.useRow();
-            board.removeCardToReturn(currentPlayer.getCardToPlay());
-            currentPlayer.useCard();
-        } else if (!currentPlayer.hasPlayerChosen()) {
+        if (this.currentPlayer.isHuman() && this.currentPlayer.getRowToPlay() == -1) {
+            if (this.board.needsToChooseARow(currentPlayer)) {
+                this.state = RoundState.WAITING_FOR_ROW;
+            } else {
+                this.board.addCardToBoard(currentPlayer.getCardToPlay(), currentPlayer);
+                this.currentPlayer.useCard();
+                goToNextPlayer();
+            }
             return;
-        } else {
-            board.addCardToBoardRow(currentPlayer.getCardToPlay(), currentPlayer.getRowToPlay(), currentPlayer);
-            currentPlayer.useRow();
-            board.removeCardToReturn(currentPlayer.getCardToPlay());
-            currentPlayer.useCard();
         }
-
-        if (playerIterator.hasNext()) {
-            this.currentPlayer = playerIterator.next();
-        } else {
-            this.state = RoundState.CHOOSE_CARD;
-            turn++;
-            playerIterator = players.iterator();
-            currentPlayer = playerIterator.next();
+        if (this.currentPlayer.getRowToPlay() == -1) {
+            if (this.board.needsToChooseARow(currentPlayer)) {
+                this.currentPlayer.playRow(DumbAi.chooseRow());
+                this.board.addCardToBoardRow(currentPlayer.getCardToPlay(), currentPlayer.getRowToPlay(), currentPlayer);
+                this.currentPlayer.useRow();
+                this.currentPlayer.useCard();
+            } else {
+                this.board.addCardToBoard(currentPlayer.getCardToPlay(), currentPlayer);
+                this.currentPlayer.useCard();
+            }
+            goToNextPlayer();
+            return;
         }
-    }
-
-    public Card movePlayerCard(Player player) {
-        return null;
+        this.board.addCardToBoardRow(currentPlayer.getCardToPlay(), currentPlayer.getRowToPlay(), currentPlayer);
+        this.currentPlayer.useCard();
+        this.currentPlayer.useRow();
+        goToNextPlayer();
     }
 
     public boolean isFinished() {
         return turn > 10;
     }
 
+    public boolean needsChooseARow() {
+        return board.needsToChooseARow(currentPlayer);
+    }
 }

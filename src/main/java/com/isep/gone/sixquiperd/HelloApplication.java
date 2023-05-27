@@ -1,13 +1,17 @@
 package com.isep.gone.sixquiperd;
 
 import com.isep.gone.sixquiperd.core.Game;
+import com.isep.gone.sixquiperd.core.RoundState;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.util.Scanner;
+
 public class HelloApplication extends Application {
 
     private final Game game = new Game("Randomix", 1);
+    private Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         launch();
@@ -60,11 +64,30 @@ public class HelloApplication extends Application {
             @Override
             public void handle(long now) {
                 game.play();
-                System.out.println("Current player: " + game.getCurrentPlayer());
-                System.out.println("Board: " + game.getBoard());
-                game.getCurrentPlayer();
-                game.getMainPlayer();
-                game.getBoard();
+                System.out.println("Score : " + game.getCurrentPlayer().getScore());
+                System.out.println("Turn number " + game.getCurrentRound().getTurn());
+                System.out.println("Current player is " + game.getCurrentPlayer().getName());
+                System.out.println("Current state is " + game.getRoundState());
+                if (game.getMainPlayer() == game.getCurrentPlayer()) {
+                    System.out.println("It's your turn");
+                    System.out.println("Your hand is : ");
+                    for (int i = 0; i < game.getMainPlayer().getHand().size(); i++) {
+                        System.out.println(i + " : " + game.getMainPlayer().getHand().get(i).getCardNumber());
+                    }
+                    if (game.getRoundState() == RoundState.WAITING_FOR_CARD || game.getRoundState() == RoundState.WAITING_FOR_ROW) {
+                        System.out.println("Choose a card to play : ");
+                        int cardIndex = scanner.nextInt();
+                        scanner.nextLine();
+                        if (game.getRoundState() == RoundState.WAITING_FOR_CARD) {
+                            game.chooseCard(game.getCurrentPlayer().getHand().get(cardIndex));
+                        } else {
+                            System.out.println("Choose a row to play on : ");
+                            int rowIndex = scanner.nextInt();
+                            scanner.nextLine();
+                            game.chooseRow(rowIndex);
+                        }
+                    }
+                }
             }
         }.start();
     }

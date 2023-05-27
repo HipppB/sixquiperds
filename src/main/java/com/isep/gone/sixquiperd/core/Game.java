@@ -30,7 +30,7 @@ public class Game {
     }
 
     public boolean isGameOver() {
-        return players.stream().anyMatch(player -> player.getScore() >= 66);
+        return players.stream().anyMatch(player -> player.getScore() >= 66) && this.currentRound.isFinished();
     }
 
     private void initDeck() {
@@ -61,10 +61,22 @@ public class Game {
     }
 
     public void chooseCard(Card card) {
-        if (currentRound.getCurrentPlayer().getHand().contains(card) && currentRound.getCurrentPlayer() == mainPlayer) {
+        if (currentRound.getCurrentPlayer().getHand().contains(card) &&
+                currentRound.getCurrentPlayer() == mainPlayer &&
+                currentRound.getState() == RoundState.WAITING_FOR_CARD) {
             currentRound.getCurrentPlayer().playCard(card);
         } else {
             throw new IllegalArgumentException("Card not in hand");
+        }
+    }
+
+    public void chooseRow(int rowNumber) {
+        if (rowNumber >= 0 && rowNumber <= 3 &&
+                currentRound.getCurrentPlayer() == mainPlayer &&
+                currentRound.getState() == RoundState.WAITING_FOR_ROW) {
+            currentRound.getCurrentPlayer().playRow(rowNumber);
+        } else {
+            throw new IllegalArgumentException("Row number must be between 0 and 3");
         }
     }
 
@@ -78,5 +90,9 @@ public class Game {
 
     public RoundState getRoundState() {
         return currentRound.getState();
+    }
+
+    public boolean needsChooseRow() {
+        return currentRound.needsChooseARow();
     }
 }

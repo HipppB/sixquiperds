@@ -43,6 +43,7 @@ public class Board {
     }
 
     public void addCardToBoardRow(Card card, int rowNumber, Player player) {
+        System.out.println("Adding card " + card.cardNumber + " to row " + rowNumber + " for player " + player.getName());
         Deque<Card> row = rows.get(rowNumber);
         if (row.size() == 5) {
             player.addScore(row.stream().mapToInt(card1 -> card1.beefHead).sum());
@@ -58,5 +59,14 @@ public class Board {
 
     protected void removeCardToReturn(Card card) {
         cardsToReturn.remove(card);
+    }
+
+    protected boolean needsToChooseARow(Player player) {
+        for (var row : rows) {
+            if (row.peek().getCardNumber() < player.getCardToPlayNumber()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

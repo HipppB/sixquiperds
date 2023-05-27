@@ -19,7 +19,7 @@ public class Player {
 
     private Card cardToPlay;
 
-    private int rowToPlay;
+    private int rowToPlay = -1;
 
     public Player(@NotNull String name, boolean isHuman) {
         this.name = name;
@@ -63,7 +63,7 @@ public class Player {
     }
 
     protected boolean hasPlayerChosen() {
-        return this.cardToPlay != null && this.rowToPlay != -1;
+        return this.cardToPlay != null;
     }
 
     protected int getCardToPlayNumber() {
