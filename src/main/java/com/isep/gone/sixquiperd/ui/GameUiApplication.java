@@ -22,24 +22,22 @@ public class GameUiApplication extends javafx.application.Application {
 
             @Override
             public void handle(long now) {
-                System.out.println("getHand" + player.getHand().size());
                 boardUi.display(game.getBoard(), player);
-
-                System.out.println("Actualing board");
-                boardUi.display(game.getBoard(), player);
-                System.out.println("Board actualised");
-                if (game.getCurrentPlayer() == player) {
-
-                } else {
+                if (game.getCurrentPlayer() != player) {
+                    // TODO: Let the AI play, look the state to set it on the board
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(500);
                         System.out.println("GameUiApplication: handle: sleep");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-//                    game.play();
+
+                } else {
+                    player.getCardToPlay();
+                    // TODO: The player can play, it will change the state of the game
+
                 }
-//                game.play();
+                game.play();
 
             }
         }.start();

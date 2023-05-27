@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<StackPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="419.0" fitWidth="521.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@PlateauJE.png" />
+         </image>
+      </ImageView>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="521.0">
+         <top>
+            <HBox id="topSection" prefHeight="81.0" prefWidth="305.0" BorderPane.alignment="CENTER" />
+         </top>
+         <bottom>
+            <HBox prefHeight="99.0" prefWidth="521.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox prefHeight="99.0" prefWidth="404.0">
+                     <children>
+                        <HBox id="Info text" prefHeight="39.0" prefWidth="404.0" />
+                        <HBox id="playerHand" prefHeight="67.0" prefWidth="404.0" />
+                        <HBox prefHeight="20.0" prefWidth="404.0" />
+                     </children>
+                  </VBox>
+                  <BorderPane prefHeight="99.0" prefWidth="131.0">
+                     <center>
+                        <VBox id="actionButton" prefHeight="74.0" prefWidth="62.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <top>
+                        <HBox prefHeight="7.0" prefWidth="124.0" BorderPane.alignment="CENTER" />
+                     </top>
+                     <bottom>
+                        <HBox prefHeight="9.0" prefWidth="144.0" BorderPane.alignment="CENTER" />
+                     </bottom>
+                     <left>
+                        <VBox prefHeight="0.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
+                     </left>
+                     <right>
+                        <VBox prefHeight="83.0" prefWidth="9.0" BorderPane.alignment="CENTER" />
+                     </right>
+                  </BorderPane>
+               </children>
+            </HBox>
+         </bottom>
+         <left>
+            <VBox prefHeight="238.0" prefWidth="114.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <VBox prefHeight="226.0" prefWidth="114.0" BorderPane.alignment="CENTER" />
+         </right>
+         <center>
+            <VBox id="boardMain" prefHeight="220.0" prefWidth="292.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox id="line1" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox id="line2" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox id="line3" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+                  <HBox id="line4" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>
