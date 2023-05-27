@@ -38,7 +38,7 @@ public class Round {
 
     public void chooseCards() {
         if (!currentPlayer.isHuman()) {
-            Card cardToPlay = currentPlayer.getHand().get(DumbAi.play());
+            Card cardToPlay = currentPlayer.getHand().get(DumbAi.play(currentPlayer.getHand().size()));
             currentPlayer.playCard(cardToPlay);
             board.addCardToReturn(cardToPlay);
             if (playerIterator.hasNext()) {
