@@ -53,12 +53,15 @@ public class Game {
 
     public void play() {
         if (!isGameOver()) {
+            if (currentRound.isFinished()) {
+                currentRound = new Round(players, initialDeck);
+            }
             currentRound.play();
         }
     }
 
     public void chooseCard(Card card) {
-        if (currentRound.getCurrentPlayer().getHand().contains(card)) {
+        if (currentRound.getCurrentPlayer().getHand().contains(card) && currentRound.getCurrentPlayer() == mainPlayer) {
             currentRound.getCurrentPlayer().playCard(card);
         } else {
             throw new IllegalArgumentException("Card not in hand");

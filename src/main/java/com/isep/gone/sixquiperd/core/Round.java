@@ -40,7 +40,7 @@ public class Round {
         if (!currentPlayer.isHuman()) {
             Card cardToPlay = currentPlayer.getHand().get(DumbAi.play());
             currentPlayer.playCard(cardToPlay);
-            currentPlayer.useCard();
+            board.addCardToReturn(cardToPlay);
             if (playerIterator.hasNext()) {
                 this.currentPlayer = playerIterator.next();
             } else {
@@ -53,6 +53,7 @@ public class Round {
             return;
         }
         if (currentPlayer.hasPlayerChosen()) {
+            this.board.addCardToReturn(currentPlayer.getCardToPlay());
             if (playerIterator.hasNext()) {
                 this.currentPlayer = playerIterator.next();
             } else {
@@ -66,29 +67,40 @@ public class Round {
     }
 
     public void play() {
-        switch (this.state) {
-            case CHOOSE_ROW -> chooseRow();
-            case CHOOSE_CARD -> chooseCards();
+        if (turn <= 10) {
+            switch (this.state) {
+                case CHOOSE_ROW -> chooseRow();
+                case CHOOSE_CARD -> chooseCards();
+            }
         }
     }
 
     private void chooseRow() {
         var cardAdded = board.addCardToBoard(currentPlayer.getCardToPlay(), currentPlayer);
         if (cardAdded) {
+            this.board.removeCardToReturn(currentPlayer.getCardToPlay());
             currentPlayer.useCard();
         }
-        if (currentPlayer.isHuman()) {
+        if (!currentPlayer.isHuman()) {
             currentPlayer.playRow(DumbAi.chooseRow());
             board.addCardToBoardRow(currentPlayer.getCardToPlay(), currentPlayer.getRowToPlay(), currentPlayer);
             currentPlayer.useRow();
-
+            board.removeCardToReturn(currentPlayer.getCardToPlay());
+            currentPlayer.useCard();
+        } else if (!currentPlayer.hasPlayerChosen()) {
             return;
+        } else {
+            board.addCardToBoardRow(currentPlayer.getCardToPlay(), currentPlayer.getRowToPlay(), currentPlayer);
+            currentPlayer.useRow();
+            board.removeCardToReturn(currentPlayer.getCardToPlay());
+            currentPlayer.useCard();
         }
 
         if (playerIterator.hasNext()) {
             this.currentPlayer = playerIterator.next();
         } else {
             this.state = RoundState.CHOOSE_CARD;
+            turn++;
             playerIterator = players.iterator();
             currentPlayer = playerIterator.next();
         }
@@ -96,6 +108,10 @@ public class Round {
 
     public Card movePlayerCard(Player player) {
         return null;
+    }
+
+    public boolean isFinished() {
+        return turn > 10;
     }
 
 }

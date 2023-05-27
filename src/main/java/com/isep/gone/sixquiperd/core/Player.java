@@ -45,7 +45,7 @@ public class Player {
         this.cardToPlay = card;
     }
 
-    public Card useCard() {
+    protected Card useCard() {
         var card = cardToPlay;
         cardToPlay = null;
         return card;
@@ -58,15 +58,15 @@ public class Player {
         this.rowToPlay = rowNumber;
     }
 
-    public void useRow() {
+    protected void useRow() {
         this.rowToPlay = -1;
     }
 
-    public boolean hasPlayerChosen() {
+    protected boolean hasPlayerChosen() {
         return this.cardToPlay != null && this.rowToPlay != -1;
     }
 
-    public int getCardToPlayNumber() {
+    protected int getCardToPlayNumber() {
         return cardToPlay.getCardNumber();
     }
 }

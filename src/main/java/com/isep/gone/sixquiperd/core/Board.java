@@ -9,6 +9,8 @@ import java.util.*;
 public class Board {
     @NonNull List<Deque<Card>> rows = new ArrayList<>();
 
+    private List<Card> cardsToReturn = new ArrayList<>();
+
     public Board(Deque<Card> cards) {
         if (cards.size() < 4) {
             throw new IllegalArgumentException("Cannot play with less than 4 cards !");
@@ -48,5 +50,13 @@ public class Board {
         }
         row.add(card);
         rows.set(rowNumber, row);
+    }
+
+    protected void addCardToReturn(Card card) {
+        cardsToReturn.add(card);
+    }
+
+    protected void removeCardToReturn(Card card) {
+        cardsToReturn.remove(card);
     }
 }
