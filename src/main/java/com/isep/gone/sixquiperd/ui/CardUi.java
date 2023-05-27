@@ -1,6 +1,7 @@
 package com.isep.gone.sixquiperd.ui;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 
 public class CardUi {
     private Integer cardNumber;
@@ -11,14 +12,16 @@ public class CardUi {
     }
 
     // Get image from card number
-    public ImageView getCard() {
+    public StackPane getCard() {
+        StackPane stackPane = new StackPane();
         ImageView imageView = new ImageView();
-        imageView.getStyleClass().add("card");
+        stackPane.getStyleClass().add("card");
         imageView.setFitHeight(100);
         imageView.setFitWidth(100);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         imageView.setCache(true);
+        imageView.setPickOnBounds(true);
         imageView.setImage(
                 new javafx.scene.image.Image(
                         getClass().getResourceAsStream(
@@ -26,7 +29,8 @@ public class CardUi {
                         )
                 )
         );
-        return imageView;
+        stackPane.getChildren().add(imageView);
+        return stackPane;
     }
 
 }

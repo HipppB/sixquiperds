@@ -7,7 +7,6 @@
 .row {
     -fx-fill-width: true;
     -fx-stroke-width: 2px;
-    -fx-background-color: red;
     -fx-width: 1000px;
     -fx-height: 100px;
 }
@@ -15,7 +14,7 @@
 .card {
     -fx-fill-width: true;
     -fx-stroke-width: 2px;
-    -fx-background-color: red;
     -fx-width: 100px;
     -fx-height: 100px;
+    -fx-padding: 10px;
 }

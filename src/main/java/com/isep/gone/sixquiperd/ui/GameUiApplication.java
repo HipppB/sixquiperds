@@ -14,6 +14,7 @@ public class GameUiApplication extends javafx.application.Application {
         System.out.println("Game started");
         new AnimationTimer() {
             Game game = new Game("Super Player", 4);
+
             BoardUi boardUi = new BoardUi(primaryStage);
 
             Player player = game.getMainPlayer();
@@ -21,22 +22,23 @@ public class GameUiApplication extends javafx.application.Application {
 
             @Override
             public void handle(long now) {
+                System.out.println("getHand" + player.getHand().size());
                 boardUi.display(game.getBoard(), player);
 
-                System.out.println("GameUiApplication: handle");
-//                boardUi.display(game.getBoard(), player);
-//
-//                if (game.getCurrentPlayer() == player) {
-//
-//                } else {
-                try {
-                    Thread.sleep(1000);
-                    System.out.println("GameUiApplication: handle: sleep");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                System.out.println("Actualing board");
+                boardUi.display(game.getBoard(), player);
+                System.out.println("Board actualised");
+                if (game.getCurrentPlayer() == player) {
+
+                } else {
+                    try {
+                        Thread.sleep(1000);
+                        System.out.println("GameUiApplication: handle: sleep");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 //                    game.play();
-//                }
+                }
 //                game.play();
 
             }

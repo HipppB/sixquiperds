@@ -25,6 +25,7 @@ public class Round {
             for (int i = 0; i < 10; i++) {
                 playerCards.add(deck.remove());
             }
+
             player.initHand(playerCards);
         });
     }
