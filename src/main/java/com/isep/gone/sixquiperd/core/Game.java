@@ -16,17 +16,13 @@ public class Game {
 
     Round currentRound;
 
-    public Game(String mainPlayerName, int nbBots) {
+    public Game(String mainPlayerName, Integer nbBots) {
         mainPlayer = new Player(mainPlayerName, true);
-        players = List.of(mainPlayer);
+        players = new ArrayList<>();
+        players.add(mainPlayer);
         for (int i = 0; i < nbBots; i++) {
             players.add(new Player("Bot " + i, false));
         }
-        players.forEach(player -> {
-            if (player.isHuman()) {
-                mainPlayer = player;
-            }
-        });
         initDeck();
         initRound();
 //        play();
