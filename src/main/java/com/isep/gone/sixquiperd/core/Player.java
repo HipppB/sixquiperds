@@ -26,6 +26,7 @@ public class Player {
         if (cards.size() != 10) {
             throw new IllegalArgumentException("Card length must be 10");
         }
+        hand.addAll(cards);
     }
 
     public void addScore(Integer score) {
