@@ -250,7 +250,100 @@
                 </VBox>
             </center>
             <top>
-                <HBox prefHeight="109.0" prefWidth="685.0" BorderPane.alignment="CENTER" />
+                <HBox prefHeight="109.0" prefWidth="685.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox prefHeight="109.0" prefWidth="369.0" />
+                  <VBox prefHeight="109.0" prefWidth="483.0">
+                     <children>
+                        <HBox prefHeight="17.0" prefWidth="400.0" />
+                        <HBox id="CardBeeingChoosen" prefHeight="69.0" prefWidth="380.0">
+                           <children>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="45.0">
+                                 <children>
+                                    <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="7.0" top="2.0" />
+                                 </HBox.margin>
+                              </Pane>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="45.0">
+                                 <children>
+                                    <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="7.0" top="2.0" />
+                                 </HBox.margin>
+                              </Pane>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="45.0">
+                                 <children>
+                                    <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="7.0" top="2.0" />
+                                 </HBox.margin>
+                              </Pane>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="45.0">
+                                 <children>
+                                    <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="7.0" top="2.0" />
+                                 </HBox.margin>
+                              </Pane>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="45.0">
+                                 <children>
+                                    <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="7.0" top="2.0" />
+                                 </HBox.margin>
+                              </Pane>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="45.0">
+                                 <children>
+                                    <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="7.0" top="2.0" />
+                                 </HBox.margin>
+                              </Pane>
+                              <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="45.0">
+                                 <children>
+                                    <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="7.0" top="2.0" />
+                                 </HBox.margin>
+                              </Pane>
+                           </children>
+                           <padding>
+                              <Insets left="7.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="19.0" prefWidth="400.0" />
+                     </children>
+                  </VBox>
+               </children></HBox>
             </top>
         </BorderPane>
     </children>

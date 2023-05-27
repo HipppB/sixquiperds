@@ -33,11 +33,8 @@ public class BoardUi {
         this.primaryStage = primaryStage;
         this.boardController = boardController;
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("board3.fxml"));
-            this.root = root;
-            System.out.println(root);
-            Scene scene = new Scene(root);
-            this.scene = scene;
+            this.root = FXMLLoader.load(getClass().getResource("board3.fxml"));
+            this.scene = new Scene(root);
             primaryStage.setScene(scene);
             // Set a title for the Stage
             primaryStage.setTitle("Six Qui Perd");
@@ -67,18 +64,12 @@ public class BoardUi {
     private void setEventHandlers() {
         // set event handlers on lines
         VBox mainBoard = (VBox) this.root.lookup("#boardMain");
+        String selectorLine = "#line";
         for (int row = 0; row < mainBoard.getChildren().size(); row++) {
-            HBox hBoxRow = (HBox) mainBoard.lookup("#line" + (row + 1));
+            HBox hBoxRow = (HBox) mainBoard.lookup(selectorLine + (row + 1));
 
             int finalRow = row;
             hBoxRow.setOnMouseClicked(event -> {
-                for (int j = 0; j < mainBoard.getChildren().size(); j++) {
-                    HBox hBoxRow1 = (HBox) mainBoard.lookup("#line" + (j + 1));
-                    if (hBoxRow1.getStyleClass().contains("selected")) {
-                        hBoxRow1.getStyleClass().remove("selected");
-                    }
-                }
-                hBoxRow.getStyleClass().add("selected");
                 this.selectedRow = finalRow;
                 boardController.onRowClicked(finalRow);
                 System.out.println("Clicked on row " + finalRow);
@@ -91,17 +82,7 @@ public class BoardUi {
             Pane pane = (Pane) playerHand.getChildren().get(i);
             int finalI = i;
             pane.setOnMouseClicked(event -> {
-
-                // remove selected class from all cards
-//                for (int j = 0; j < playerHand.getChildren().size(); j++) {
-//                    Pane pane1 = (Pane) playerHand.getChildren().get(j);
-//                    if (pane1.getStyleClass().contains("selectedCard")) {
-//                        pane1.getStyleClass().remove("selectedCard");
-//                    }
-//                }
                 this.selectedHandCard = finalI;
-//                playerHand.getChildren().get(finalI)
-//                        .getStyleClass().add("selectedCard");
                 boardController.onCardHandClicked(finalI);
                 System.out.println("Clicked on card Hand " + finalI);
             });
@@ -117,7 +98,16 @@ public class BoardUi {
     }
 
     public void display(Board board, Player player) {
+        displayBoard(board);
+        displayPlayerHand(player);
+        displayCardBeingChoosen(board);
+        // id button #playButton
+        Button playButton = (Button) this.root.lookup("#playButton");
+        playButton.getStyleClass().add("disabled");
 
+    }
+
+    private void displayBoard(Board board) {
         VBox mainBoard = (VBox) this.root.lookup("#boardMain");
 
         // For each line in main board
@@ -137,11 +127,10 @@ public class BoardUi {
                 }
             }
         }
+    }
 
-        // For each player card
-
+    private void displayPlayerHand(Player player) {
         HBox playerHand = (HBox) this.root.lookup("#playerHand");
-
         List<Card> hand = player.getHand();
         for (int i = 0; i < hand.size(); i++) {
             CardUi cardUi = new CardUi(hand.get(i).getCardNumber());
@@ -155,69 +144,24 @@ public class BoardUi {
                 ((ImageView) pane.getChildren().get(0)).setImage(null);
             }
         }
-
-        // id button #playButton
-        Button playButton = (Button) this.root.lookup("#playButton");
-
-        if (playButton.getStyleClass().contains("disabled") && player.getCardToPlay() != null) {
-            playButton.getStyleClass().remove("disabled");
-        } else if (!playButton.getStyleClass().contains("disabled") && player.getCardToPlay() == null) {
-            playButton.getStyleClass().add("disabled");
-        }
-
-
-//
-//        VBox vBox = new VBox();
-//        vBox.getStyleClass().add("vbox");
-//
-//
-//        for (int i = 0; i < board.getRows().size(); i++) {
-//            HBox hBox = new HBox();
-//            Iterator<Card> iterator = board.getRows().get(i).iterator();
-//            while (iterator.hasNext()) {
-//                int cardNumber = iterator.next().getCardNumber();
-//                CardUi cardUi = new CardUi(cardNumber);
-//                hBox.getChildren().add(cardUi.getCard());
-//
-//            }
-//            vBox.getChildren().add(hBox);
-//        }
-//
-//        HBox PlayerHand = new HBox();
-//        PlayerHand.setMouseTransparent(true);
-//        vBox.setMargin(PlayerHand, new javafx.geometry.Insets(10, 10, 10, 10));
-//        vBox.setMouseTransparent(true);
-//
-//
-//        player.getHand().forEach(card -> {
-//            CardUi cardUi = new CardUi(card.getCardNumber());
-//            Pane pane = cardUi.getCard();
-//            pane.getStyleClass().add("card");
-//            pane.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-//                System.out.println("clicked on " + card.getCardNumber());
-//            });
-//            PlayerHand.getChildren().add(pane);
-//        });
-//
-//        Label playerName = new Label(player.getName());
-//        playerName.getStyleClass().add("playerName");
-//        vBox.getChildren().add(playerName);
-//        vBox.getChildren().add(PlayerHand);
-//
-//        AnchorPane anchorPane = new AnchorPane();
-//        anchorPane.getChildren().add(vBox);
-////        root.getChildren().clear();
-////        root.getChildren().add(anchorPane);
-
     }
 
-    private HBox choosenCards(List<Card> Cards) {
-        HBox hBox = new HBox();
-        Cards.forEach(card -> {
-            CardUi cardUi = new CardUi(card.getCardNumber());
-            hBox.getChildren().add(cardUi.getCard());
-        });
-        return hBox;
+    private void displayCardBeingChoosen(Board board) {
+        HBox cardContainer = (HBox) this.root.lookup("#CardBeeingChoosen");
+        List<Card> cardsToReturn = board.getCardsToReturn();
+        for (int i = 0; i < cardsToReturn.size(); i++) {
+            CardUi cardUi = new CardUi(cardsToReturn.get(i).getCardNumber());
+            Pane pane = (Pane) cardContainer.getChildren().get(i);
+            ((ImageView) pane.getChildren().get(0)).setImage(cardUi.getImage());
+
+        }
+        if (cardsToReturn.size() < cardContainer.getChildren().size()) {
+            for (int i = cardsToReturn.size(); i < cardContainer.getChildren().size(); i++) {
+                Pane pane = (Pane) cardContainer.getChildren().get(i);
+                ((ImageView) pane.getChildren().get(0)).setImage(null);
+            }
+        }
+
     }
 
 
