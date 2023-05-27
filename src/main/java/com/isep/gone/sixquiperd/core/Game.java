@@ -72,4 +72,8 @@ public class Game {
     public Board getBoard() {
         return currentRound.getBoard();
     }
+
+    public RoundState getRoundState() {
+        return currentRound.getState();
+    }
 }
