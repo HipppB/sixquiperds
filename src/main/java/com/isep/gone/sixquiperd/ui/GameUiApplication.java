@@ -6,6 +6,7 @@ import javafx.animation.AnimationTimer;
 
 public class GameUiApplication extends javafx.application.Application {
 
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -15,7 +16,8 @@ public class GameUiApplication extends javafx.application.Application {
         new AnimationTimer() {
             Game game = new Game("Super Player", 4);
 
-            BoardUi boardUi = new BoardUi(primaryStage);
+            BoardController boardController = new BoardController(game);
+            BoardUi boardUi = new BoardUi(primaryStage, boardController);
 
             Player player = game.getMainPlayer();
 
@@ -23,6 +25,7 @@ public class GameUiApplication extends javafx.application.Application {
             @Override
             public void handle(long now) {
                 boardUi.display(game.getBoard(), player);
+//                System.out.println("player " + player.getName());
                 if (game.getCurrentPlayer() != player) {
                     // TODO: Let the AI play, look the state to set it on the board
                     try {

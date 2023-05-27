@@ -47,5 +47,12 @@
 .selectedCard {
     /*    Set bottom margin to 10px to make space for the card*/
     -fx-margin-bottom: 10px;
+    /*    translate top */
+    -fx-translate-y: -30px;
 
+}
+
+.disable {
+    /*display non*/
+    -fx-opacity: 0;
 }

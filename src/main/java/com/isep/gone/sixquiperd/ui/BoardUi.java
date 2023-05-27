@@ -8,6 +8,7 @@ import com.isep.gone.sixquiperd.core.Player;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -26,10 +27,11 @@ public class BoardUi {
     Parent root;
     Integer selectedRow = null;
     Integer selectedHandCard = null;
+    BoardController boardController;
 
-    BoardUi(Stage primaryStage) {
+    BoardUi(Stage primaryStage, BoardController boardController) {
         this.primaryStage = primaryStage;
-
+        this.boardController = boardController;
         try {
             Parent root = FXMLLoader.load(getClass().getResource("board3.fxml"));
             this.root = root;
@@ -42,13 +44,9 @@ public class BoardUi {
             // Display the Stage
             primaryStage.show();
         } catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
 
-//        this.root = new AnchorPane();
-//        this.root.getStyleClass().add("root");
-//        this.primaryStage = primaryStage;
-//        this.scene = new Scene(this.root, 640 * 1.5, 480 * 1.5);
         initScene();
         setEventHandlers();
     }
@@ -82,6 +80,7 @@ public class BoardUi {
                 }
                 hBoxRow.getStyleClass().add("selected");
                 this.selectedRow = finalRow;
+                boardController.onRowClicked(finalRow);
                 System.out.println("Clicked on row " + finalRow);
             });
         }
@@ -94,18 +93,27 @@ public class BoardUi {
             pane.setOnMouseClicked(event -> {
 
                 // remove selected class from all cards
-                for (int j = 0; j < playerHand.getChildren().size(); j++) {
-                    Pane pane1 = (Pane) playerHand.getChildren().get(j);
-                    if (pane1.getStyleClass().contains("selectedCard")) {
-                        pane1.getStyleClass().remove("selectedCard");
-                    }
-                }
+//                for (int j = 0; j < playerHand.getChildren().size(); j++) {
+//                    Pane pane1 = (Pane) playerHand.getChildren().get(j);
+//                    if (pane1.getStyleClass().contains("selectedCard")) {
+//                        pane1.getStyleClass().remove("selectedCard");
+//                    }
+//                }
                 this.selectedHandCard = finalI;
-                playerHand.getChildren().get(finalI)
-                        .getStyleClass().add("selectedCard");
+//                playerHand.getChildren().get(finalI)
+//                        .getStyleClass().add("selectedCard");
+                boardController.onCardHandClicked(finalI);
                 System.out.println("Clicked on card Hand " + finalI);
             });
         }
+        Button playButton = (Button) this.root.lookup("#playButton");
+        playButton.setOnMouseClicked(event -> {
+            System.out.println("Play button clicked " + this.selectedHandCard + " " + this.selectedRow);
+            if (this.selectedRow != null && this.selectedHandCard != null) {
+                System.out.println("Play card " + this.selectedHandCard + " on row " + this.selectedRow);
+
+            }
+        });
     }
 
     public void display(Board board, Player player) {
@@ -147,7 +155,17 @@ public class BoardUi {
                 ((ImageView) pane.getChildren().get(0)).setImage(null);
             }
         }
-//
+
+        // id button #playButton
+        Button playButton = (Button) this.root.lookup("#playButton");
+
+        if (playButton.getStyleClass().contains("disabled") && player.getCardToPlay() != null) {
+            playButton.getStyleClass().remove("disabled");
+        } else if (!playButton.getStyleClass().contains("disabled") && player.getCardToPlay() == null) {
+            playButton.getStyleClass().add("disabled");
+        }
+
+
 //
 //        VBox vBox = new VBox();
 //        vBox.getStyleClass().add("vbox");
