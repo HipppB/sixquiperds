@@ -11,6 +11,7 @@ module com.isep.gone.sixquiperd {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires annotations;
+    requires spring.web;
 
 
     exports com.isep.gone.sixquiperd;
