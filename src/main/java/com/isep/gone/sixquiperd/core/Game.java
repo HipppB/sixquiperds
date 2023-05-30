@@ -33,6 +33,12 @@ public class Game {
         return players.stream().anyMatch(player -> player.getScore() >= 66) && this.currentRound.isFinished();
     }
 
+    public Player getWinner() {
+        List<Player> clonedPlayers = new ArrayList<>(this.players);
+        clonedPlayers.sort((o1, o2) -> o2.getScore() - o1.getScore());
+        return clonedPlayers.get(0).getScore() >= 66 ? clonedPlayers.get(0) : null;
+    }
+
     private void initDeck() {
         for (int i = 1; i <= 104; i++) {
             int beefHead = 0;
