@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -92,7 +93,6 @@ public class BoardUi {
             System.out.println("Play button clicked " + this.selectedHandCard + " " + this.selectedRow);
             if (this.selectedRow != null && this.selectedHandCard != null) {
                 System.out.println("Play card " + this.selectedHandCard + " on row " + this.selectedRow);
-
             }
         });
     }
@@ -101,10 +101,25 @@ public class BoardUi {
         displayBoard(board);
         displayPlayerHand(player);
         displayCardBeingChoosen(board);
+        displayScore();
         // id button #playButton
-        Button playButton = (Button) this.root.lookup("#playButton");
-        playButton.getStyleClass().add("disabled");
 
+        Button playButton = (Button) this.root.lookup("#playButton");
+        playButton.setText(board.toString());
+
+    }
+
+    private void displayScore() {
+        VBox scoreBoard = (VBox) this.root.lookup("#scoreBoard");
+        scoreBoard.getChildren().clear();
+        List<String> players = boardController.getPlayers();
+        for (int i = 0; i < players.size(); i++) {
+//            HBox hBoxRow = (HBox) scoreBoard.lookup("#scoreLine" + (i + 1));
+//            int score = board.getPlayers().get(i).getScore();
+//            ((Button) hBoxRow.getChildren().get(0)).setText(String.valueOf(score));
+            Label label = new Label(players.get(i));
+            scoreBoard.getChildren().add(label);
+        }
     }
 
     private void displayBoard(Board board) {

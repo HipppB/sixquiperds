@@ -1,6 +1,9 @@
 package com.isep.gone.sixquiperd.ui;
 
 import com.isep.gone.sixquiperd.core.Game;
+import com.isep.gone.sixquiperd.core.Player;
+
+import java.util.List;
 
 public class BoardController {
 
@@ -8,6 +11,14 @@ public class BoardController {
 
     public BoardController(Game game) {
         this.game = game;
+    }
+
+    public List<String> getPlayers() {
+        List<String> players = new java.util.ArrayList<>();
+        for (Player player : game.getPlayers()) {
+            players.add(player.getName());
+        }
+        return players;
     }
 
     public void onRowClicked(Integer rowNumber) {

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane prefHeight="540.0" prefWidth="697.0" stylesheets="@board.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitHeight="552.0" fitWidth="704.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@board.png" />
+            </image>
+        </ImageView>
+        <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="685.0">
+            <bottom>
+                <HBox prefHeight="135.0" prefWidth="685.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox prefHeight="135.0" prefWidth="549.0">
+                            <children>
+                                <HBox id="Info text" prefHeight="39.0" prefWidth="487.0" />
+                                <HBox id="playerHand" prefHeight="94.0" prefWidth="526.0">
+                           <children>
+                              <ImageView fitHeight="68.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                              <ImageView fitHeight="65.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets left="6.0" top="3.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="12.0" top="20.0" />
+                           </VBox.margin></HBox>
+                                <HBox prefHeight="28.0" prefWidth="538.0" />
+                            </children>
+                        </VBox>
+                        <BorderPane prefHeight="135.0" prefWidth="158.0">
+                            <center>
+                                <VBox id="actionButton" prefHeight="74.0" prefWidth="62.0" BorderPane.alignment="CENTER" />
+                            </center>
+                            <top>
+                                <HBox prefHeight="7.0" prefWidth="124.0" BorderPane.alignment="CENTER" />
+                            </top>
+                            <bottom>
+                                <HBox prefHeight="9.0" prefWidth="144.0" BorderPane.alignment="CENTER" />
+                            </bottom>
+                            <left>
+                                <VBox prefHeight="0.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
+                            </left>
+                            <right>
+                                <VBox prefHeight="83.0" prefWidth="9.0" BorderPane.alignment="CENTER" />
+                            </right>
+                        </BorderPane>
+                    </children>
+                </HBox>
+            </bottom>
+            <left>
+                <VBox prefHeight="442.0" prefWidth="144.0" BorderPane.alignment="CENTER" />
+            </left>
+            <right>
+                <VBox prefHeight="333.0" prefWidth="146.0" BorderPane.alignment="CENTER" />
+            </right>
+            <center>
+                <VBox id="boardMain" prefHeight="278.0" prefWidth="395.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox id="line1" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </HBox>
+                        <HBox id="line2" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </HBox>
+                        <HBox id="line3" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </HBox>
+                        <HBox id="line4" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                                <ImageView fitHeight="55.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </center>
+         <top>
+            <HBox prefHeight="109.0" prefWidth="685.0" BorderPane.alignment="CENTER" />
+         </top>
+        </BorderPane>
+    </children>
+</StackPane>
