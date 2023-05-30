@@ -39,6 +39,7 @@ public class Round {
     private void changeState() {
         if (this.players.stream().allMatch(player -> player.getCardToPlay() != null)) {
             this.state = RoundState.CHOOSE_ROW;
+            this.players.forEach(player -> player.getCardToPlay().show());
             var clonedPlayers = new ArrayList<>(players);
             clonedPlayers.sort(Comparator.comparingInt(Player::getCardToPlayNumber));
             playerIterator = clonedPlayers.iterator();
@@ -60,6 +61,7 @@ public class Round {
         }
         if (this.currentPlayer.getCardToPlay() == null) {
             Card cardToAdd = this.currentPlayer.getHand().get(DumbAi.play(this.currentPlayer.getHand().size()));
+            cardToAdd.hide();
             this.currentPlayer.playCard(cardToAdd);
             this.board.addCardToReturn(cardToAdd);
             goToNextPlayer();

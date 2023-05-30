@@ -66,7 +66,7 @@ public class Game {
                 currentRound.getState() == RoundState.WAITING_FOR_CARD) {
             currentRound.getCurrentPlayer().playCard(card);
         } else {
-            throw new IllegalArgumentException("Card not in hand");
+            throw new IllegalArgumentException("Cannot choose card now");
         }
     }
 
@@ -76,7 +76,7 @@ public class Game {
                 currentRound.getState() == RoundState.WAITING_FOR_ROW) {
             currentRound.getCurrentPlayer().playRow(rowNumber);
         } else {
-            throw new IllegalArgumentException("Row number must be between 0 and 3");
+            throw new IllegalArgumentException("You can't choose row now");
         }
     }
 

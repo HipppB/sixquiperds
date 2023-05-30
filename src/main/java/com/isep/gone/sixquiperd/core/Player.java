@@ -41,6 +41,7 @@ public class Player {
         if (!hand.contains(card)) {
             throw new IllegalArgumentException("Card must be in hand");
         }
+        card.hide();
         hand.remove(card);
         this.cardToPlay = card;
     }
