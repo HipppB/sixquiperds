@@ -13,13 +13,11 @@ public class BoardController {
         this.game = game;
     }
 
-    public List<String> getPlayers() {
-        List<String> players = new java.util.ArrayList<>();
-        for (Player player : game.getPlayers()) {
-            players.add(player.getName());
-        }
-        return players;
+    public List<Player> getPlayers() {
+
+        return game.getPlayers();
     }
+
 
     public void onRowClicked(Integer rowNumber) {
         System.out.println("Row clicked " + rowNumber);
@@ -31,6 +29,9 @@ public class BoardController {
         }
     }
 
+    public Player getCurrentPlayer() {
+        return game.getCurrentPlayer();
+    }
 
     public void onCardHandClicked(Integer cardNumber) {
         System.out.println("Card clicked");

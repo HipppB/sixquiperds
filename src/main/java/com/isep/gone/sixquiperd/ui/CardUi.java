@@ -1,5 +1,6 @@
 package com.isep.gone.sixquiperd.ui;
 
+import com.isep.gone.sixquiperd.core.Card;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -10,11 +11,13 @@ public class CardUi {
     private Integer cardNumber;
     @Getter
     private ImageView imageView;
-    @Getter
-    private Image image;
 
-    CardUi(Integer cardNumber) {
-        this.cardNumber = cardNumber;
+    private Image image;
+    private Card card;
+
+    CardUi(Card card) {
+        this.card = card;
+        this.cardNumber = card.getCardNumber();
         this.imageView = new ImageView();
         this.image = new javafx.scene.image.Image(
                 getClass().getResourceAsStream(
@@ -23,6 +26,21 @@ public class CardUi {
         );
     }
 
+    public Image getImage() {
+        if (card.isHidden()) {
+            return new javafx.scene.image.Image(
+                    getClass().getResourceAsStream(
+                            "cards/backside.png"
+                    )
+            );
+        } else {
+            return new javafx.scene.image.Image(
+                    getClass().getResourceAsStream(
+                            "cards/" + cardNumber + ".png"
+                    )
+            );
+        }
+    }
 
     // Get image from card number
     public ImageView getCard() {

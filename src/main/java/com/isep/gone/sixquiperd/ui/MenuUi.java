@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 // This class displays the menu of the game
 public class MenuUi {
     public void display(Stage primaryStage) {
@@ -14,7 +16,10 @@ public class MenuUi {
         Parent root = new GridPane();
         try {
             root = FXMLLoader.load(getClass().getResource("menu.fxml"));
-
+            root.getStylesheets().add(Objects.requireNonNull(
+                    getClass().getResource("board.css")
+            ).toExternalForm(
+            ));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -27,6 +32,8 @@ public class MenuUi {
         // Display the Stage
         primaryStage.show();
         Button playButton = (Button) root.lookup("#playButton");
+        playButton.getStyleClass().add("button");
+        
         MenuController menuController = new MenuController();
 
         playButton.setOnMouseClicked(event -> {

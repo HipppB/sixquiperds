@@ -49,10 +49,12 @@ public class BoardUi {
         setEventHandlers();
     }
 
-
     public void initScene() {
-        this.primaryStage.setTitle("Six Qui Perd !");
-
+        primaryStage.setScene(scene);
+        primaryStage.setHeight(552);
+        primaryStage.setWidth(704);
+        primaryStage.resizableProperty().setValue(Boolean.FALSE);
+        primaryStage.show();
         scene.getStylesheets().add(Objects.requireNonNull(
                 getClass().getResource("board.css")
         ).toExternalForm(
@@ -112,12 +114,21 @@ public class BoardUi {
     private void displayScore() {
         VBox scoreBoard = (VBox) this.root.lookup("#scoreBoard");
         scoreBoard.getChildren().clear();
-        List<String> players = boardController.getPlayers();
+        List<Player> players = boardController.getPlayers();
         for (int i = 0; i < players.size(); i++) {
+            System.out.println(players.get(i).getName());
+            System.out.println(boardController.getCurrentPlayer().getName());
 //            HBox hBoxRow = (HBox) scoreBoard.lookup("#scoreLine" + (i + 1));
 //            int score = board.getPlayers().get(i).getScore();
 //            ((Button) hBoxRow.getChildren().get(0)).setText(String.valueOf(score));
-            Label label = new Label(players.get(i));
+            Label label = new Label(players.get(i).getScore() + " " + players.get(i).getName());
+            label.getStyleClass().add("player");
+            if (players.get(i) == boardController.getCurrentPlayer()) {
+                System.out.println("HEY");
+                label.getStyleClass().add("currentPlayer");
+            }
+            label.getStyle();
+
             scoreBoard.getChildren().add(label);
         }
     }
@@ -131,8 +142,7 @@ public class BoardUi {
             Iterator<Card> iterator = board.getRows().get(i).iterator();
             int j = 0;
             while (iterator.hasNext()) {
-                int cardNumber = iterator.next().getCardNumber();
-                CardUi cardUi = new CardUi(cardNumber);
+                CardUi cardUi = new CardUi(iterator.next());
                 ((ImageView) hBoxRow.getChildren().get(j)).setImage(cardUi.getImage());
                 j++;
             }
@@ -148,7 +158,7 @@ public class BoardUi {
         HBox playerHand = (HBox) this.root.lookup("#playerHand");
         List<Card> hand = player.getHand();
         for (int i = 0; i < hand.size(); i++) {
-            CardUi cardUi = new CardUi(hand.get(i).getCardNumber());
+            CardUi cardUi = new CardUi(hand.get(i));
             Pane pane = (Pane) playerHand.getChildren().get(i);
             ((ImageView) pane.getChildren().get(0)).setImage(cardUi.getImage());
 
@@ -165,7 +175,7 @@ public class BoardUi {
         HBox cardContainer = (HBox) this.root.lookup("#CardBeeingChoosen");
         List<Card> cardsToReturn = board.getCardsToReturn();
         for (int i = 0; i < cardsToReturn.size(); i++) {
-            CardUi cardUi = new CardUi(cardsToReturn.get(i).getCardNumber());
+            CardUi cardUi = new CardUi(cardsToReturn.get(i));
             Pane pane = (Pane) cardContainer.getChildren().get(i);
             ((ImageView) pane.getChildren().get(0)).setImage(cardUi.getImage());
 

@@ -56,3 +56,29 @@
     /*display non*/
     -fx-opacity: 0;
 }
+
+.player {
+    -fx-text-fill: white;
+
+    -fx-font-scale: 1.5;
+}
+
+.currentPlayer {
+
+    /*    Text color white and bold*/
+    -fx-text-fill: orange;
+    -fx-font-scale: 1.7;
+
+
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-image: url("boutonpashover.png");
+}
+
+.button:hover {
+    -fx-background-color: white;
+    -fx-background-image: url("/boutonhover.png");
+}
