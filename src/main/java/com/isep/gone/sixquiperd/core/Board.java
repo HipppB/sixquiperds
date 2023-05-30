@@ -47,12 +47,10 @@ public class Board {
 
     protected void addCardToBoardRow(Card card, int rowNumber, Player player) {
         Deque<Card> row = rows.get(rowNumber);
-        if (row.size() == 5) {
-            player.addScore(row.stream().mapToInt(Card::getBeefHead).sum());
-            row = new ArrayDeque<>();
-        }
+        player.addScore(row.stream().mapToInt(Card::getBeefHead).sum());
+        row = new ArrayDeque<>();
         row.add(card);
-        rows.set(rowNumber, row);
+        this.rows.set(rowNumber, row);
         this.cardsToReturn.remove(card);
     }
 
