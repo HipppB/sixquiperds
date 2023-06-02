@@ -7,11 +7,10 @@ import java.util.List;
 
 @Getter
 public class Game {
+    public static final Game TEST_GAME = new Game("Test", 3);
     private final List<Player> players;
-
     private final Player mainPlayer;
     private final List<Card> initialDeck = new ArrayList<>();
-
     private Round currentRound;
 
     public Game(String mainPlayerName, Integer nbBots) {
