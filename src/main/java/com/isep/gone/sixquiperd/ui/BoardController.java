@@ -24,6 +24,7 @@ public class BoardController {
             this.game.chooseRow(rowNumber);
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
@@ -35,7 +36,6 @@ public class BoardController {
         if (cardNumber >= game.getMainPlayer().getHand().size())
             return;
         try {
-
             game.chooseCard(game.getMainPlayer().getHand().get(cardNumber));
         } catch (Exception e) {
             e.printStackTrace();
