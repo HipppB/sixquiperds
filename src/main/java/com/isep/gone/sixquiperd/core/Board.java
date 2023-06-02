@@ -25,14 +25,14 @@ public class Board {
     protected void addCardToBoard(Card card, Player player) {
         var usableRows = new ArrayList<>(this.rows.stream().filter(row -> {
             assert row.peek() != null;
-            return row.peek().getCardNumber() < card.getCardNumber();
+            return row.getLast().getCardNumber() < card.getCardNumber();
         }).toList());
         if (usableRows.isEmpty()) {
             return;
         }
         var comparedRows = usableRows.stream().sorted(Comparator.comparing(row -> {
             assert row.peek() != null;
-            return row.peek().getCardNumber();
+            return row.getLast().getCardNumber();
         })).toList();
         Deque<Card> row = comparedRows.get(comparedRows.size() - 1);
         int rowNumber = this.rows.indexOf(row);
@@ -62,7 +62,7 @@ public class Board {
     protected boolean needsToChooseARow(Player player) {
         for (var row : rows) {
             assert row.peek() != null;
-            if (row.peek().getCardNumber() < player.getCardToPlayNumber()) {
+            if (row.getLast().getCardNumber() < player.getCardToPlayNumber()) {
                 return false;
             }
         }
