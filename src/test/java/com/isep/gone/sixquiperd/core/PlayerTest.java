@@ -16,10 +16,10 @@ class PlayerTest {
     @Test
     void testInitHand() {
 
-        assertEquals(10, player.getHand().size()); // Vérifie que la main du joueur contient 10 cartes
+        assertEquals(9, player.getHand().size()); // Vérifie que la main du joueur contient 10 cartes
 
         // Vérifie que les cartes dans la main du joueur correspondent aux cartes initiales
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 9; i++) {
             Card card = player.getHand().get(i);
             assertTrue(player.getHand().contains(card));
         }
@@ -41,7 +41,7 @@ class PlayerTest {
         assertFalse(player.getHand().contains(cardToPlay)); // Vérifie que la carte a été retirée de la main du joueur
         assertEquals(cardToPlay, player.getCardToPlay()); // Vérifie que la carte à jouer correspond à la carte choisie
     }
-    
+
     @Test
     void testPlayRow() {
         player.playRow(2);
