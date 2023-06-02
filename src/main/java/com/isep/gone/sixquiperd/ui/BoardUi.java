@@ -91,6 +91,7 @@ public class BoardUi {
             });
         }
         Button playButton = (Button) this.root.lookup("#playButton");
+        playButton.setOpacity(0);
         playButton.setOnMouseClicked(event -> {
             System.out.println("Play button clicked " + this.selectedHandCard + " " + this.selectedRow);
             if (this.selectedRow != null && this.selectedHandCard != null) {
@@ -106,8 +107,6 @@ public class BoardUi {
         displayScore();
         // id button #playButton
 
-        Button playButton = (Button) this.root.lookup("#playButton");
-        playButton.setText(board.toString());
 
     }
 

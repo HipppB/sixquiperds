@@ -4,7 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.Objects;
@@ -33,14 +35,22 @@ public class MenuUi {
         primaryStage.show();
         Button playButton = (Button) root.lookup("#playButton");
         playButton.getStyleClass().add("button");
-        
-        MenuController menuController = new MenuController();
 
+        MenuController menuController = new MenuController();
+        Text botLabel = (Text) root.lookup("#botNumber");
+        Slider botSlider = (Slider) root.lookup("#botSlider");
+
+        Parent finalRoot = root;
         playButton.setOnMouseClicked(event -> {
-            menuController.onEasyButtonClicked(primaryStage);
+            menuController.onEasyButtonClicked(primaryStage, finalRoot, (int) botSlider.getValue());
 
         });
 
+
+        botSlider.setOnMouseReleased(event -> {
+            botLabel.setText(String.valueOf((int) botSlider.getValue()) + " bots");
+            System.out.println(botSlider.getValue());
+        });
 
         // Texts
 //        Text text = new Text("Six Qui Perd");

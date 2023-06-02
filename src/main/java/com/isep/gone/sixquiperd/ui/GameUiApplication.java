@@ -11,10 +11,12 @@ public class GameUiApplication extends javafx.application.Application {
         launch(args);
     }
 
-    public static void startGame(javafx.stage.Stage primaryStage) {
+    public static void startGame(javafx.stage.Stage primaryStage, String playerName, int botNumber) {
+        // Get TextField value, the text field is on the primary stage
         System.out.println("Game started");
         new AnimationTimer() {
-            Game game = new Game("Super Player", 4);
+
+            Game game = new Game(playerName, botNumber);
 
             BoardController boardController = new BoardController(game);
             BoardUi boardUi = new BoardUi(primaryStage, boardController);
