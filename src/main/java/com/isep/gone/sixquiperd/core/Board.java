@@ -30,11 +30,11 @@ public class Board {
         if (usableRows.isEmpty()) {
             return;
         }
-        usableRows.sort(Comparator.comparingInt(o -> {
-            assert o.peek() != null;
-            return o.peek().getCardNumber();
-        }));
-        Deque<Card> row = rows.get(rows.size() - 1);
+        var comparedRows = usableRows.stream().sorted(Comparator.comparing(row -> {
+            assert row.peek() != null;
+            return row.peek().getCardNumber();
+        })).toList();
+        Deque<Card> row = comparedRows.get(comparedRows.size() - 1);
         int rowNumber = this.rows.indexOf(row);
         if (row.size() == 5) {
             player.addScore(row.stream().mapToInt(Card::getBeefHead).sum());
