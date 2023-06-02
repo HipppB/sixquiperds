@@ -98,7 +98,4 @@ public class Game {
         return currentRound.getState();
     }
 
-    public boolean needsChooseRow() {
-        return currentRound.needsChooseARow();
-    }
 }
