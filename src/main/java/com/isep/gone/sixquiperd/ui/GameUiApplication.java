@@ -4,6 +4,7 @@ import com.isep.gone.sixquiperd.core.Game;
 import com.isep.gone.sixquiperd.core.Player;
 import javafx.animation.AnimationTimer;
 
+
 public class GameUiApplication extends javafx.application.Application {
 
 
@@ -13,7 +14,6 @@ public class GameUiApplication extends javafx.application.Application {
 
     public static void startGame(javafx.stage.Stage primaryStage, String playerName, int botNumber) {
         // Get TextField value, the text field is on the primary stage
-        System.out.println("Game started");
         new AnimationTimer() {
 
             Game game = new Game(playerName, botNumber);
@@ -27,20 +27,16 @@ public class GameUiApplication extends javafx.application.Application {
             @Override
             public void handle(long now) {
                 boardUi.display(game.getBoard(), player);
-//                System.out.println("player " + player.getName());
                 if (game.getCurrentPlayer() != player) {
-                    // TODO: Let the AI play, look the state to set it on the board
                     try {
                         Thread.sleep(500);
-                        System.out.println("GameUiApplication: handle: sleep");
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                        Thread.currentThread().interrupt();
                     }
 
                 } else {
                     player.getCardToPlay();
-                    // TODO: The player can play, it will change the state of the game
-
                 }
                 game.play();
 

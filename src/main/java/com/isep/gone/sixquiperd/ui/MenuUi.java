@@ -36,60 +36,19 @@ public class MenuUi {
         Button playButton = (Button) root.lookup("#playButton");
         playButton.getStyleClass().add("button");
 
-        MenuController menuController = new MenuController();
         Text botLabel = (Text) root.lookup("#botNumber");
         Slider botSlider = (Slider) root.lookup("#botSlider");
 
         Parent finalRoot = root;
-        playButton.setOnMouseClicked(event -> {
-            menuController.onEasyButtonClicked(primaryStage, finalRoot, (int) botSlider.getValue());
-
-        });
-
-
-        botSlider.setOnMouseReleased(event -> {
-            botLabel.setText(String.valueOf((int) botSlider.getValue()) + " bots");
-            System.out.println(botSlider.getValue());
-        });
-
-        // Texts
-//        Text text = new Text("Six Qui Perd");
-//        Text instructions = new Text("Séléctionnez la difficulté");
-//
-//        // Buttons
-//        Button buttonEasy = new Button("Easy");
-//        Button buttonMedium = new Button("Medium");
-//        Button buttonHard = new Button("Hard");
-//
-//
-//        buttonEasy.getStyleClass().add("my-button");
-//        buttonMedium.getStyleClass().add("my-button");
-//        buttonHard.getStyleClass().add("my-button");
+        playButton.setOnMouseClicked(event ->
+                MenuController.onEasyButtonClicked(primaryStage, finalRoot, (int) botSlider.getValue())
+        );
 
 
-        // Event listeners
-        // Assign actions to the buttons using MenuController
-//        MenuController menuController = new MenuController();
-//        buttonEasy.setOnAction(event -> menuController.onEasyButtonClicked(primaryStage));
-//        buttonMedium.setOnAction(event -> menuController.onMediumButtonClicked(primaryStage));
-//        buttonHard.setOnAction(event -> menuController.onHardButtonClicked(primaryStage));
+        botSlider.setOnMouseReleased(event ->
+                botLabel.setText(String.valueOf((int) botSlider.getValue()) + " bots")
+        );
 
-        // Add to root
-//        root.add(text, 1, 1);
-//        root.add(instructions, 1, 2);
-//        root.add(buttonEasy, 1, 3);
-//        root.add(buttonMedium, 1, 4);
-//        root.add(buttonHard, 1, 5);
-
-
-        // Gap
-//        root.setHgap(10);
-//        root.setVgap(10);
-//
-//
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
-//        System.out.println("GameUiApplication started");
 
     }
 

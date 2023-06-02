@@ -20,8 +20,6 @@ public class BoardController {
 
 
     public void onRowClicked(Integer rowNumber) {
-        System.out.println("Row clicked " + rowNumber);
-        // TODO
         try {
             this.game.chooseRow(rowNumber);
         } catch (Exception e) {
@@ -34,7 +32,6 @@ public class BoardController {
     }
 
     public void onCardHandClicked(Integer cardNumber) {
-        System.out.println("Card clicked");
         if (cardNumber >= game.getMainPlayer().getHand().size())
             return;
         try {
@@ -43,13 +40,8 @@ public class BoardController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        game.chooseCard();
-        // TODO
+
     }
 
-    public void onPlayButtonClicked() {
 
-        System.out.println("Play button clicked");
-        // TODO
-    }
 }
